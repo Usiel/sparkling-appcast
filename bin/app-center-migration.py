@@ -43,10 +43,15 @@ class AppCenterMigration:
         releases = []
         for release in response.json():
             # Only include enabled releases distributed to all users
-            if (release.get("enabled") and
-                release.get("distribution_groups") and
-                "All-users-of-AutoProxxy" in [g["name"] for g in release["distribution_groups"]]):
-                releases.append(release)
+            if not release.get("enabled"):
+                continue
+            if not any(
+                g["name"] not in {"All-users-of-AutoProxxy", "Alpha Testers Public Distribution"}
+                for g in release.get("distribution_groups", [])
+            ):
+                continue
+
+            releases.append(release)
 
         return releases
 
@@ -121,14 +126,6 @@ class AppCenterMigration:
         print(f"Found {len(releases)} releases to migrate")
 
         for release in releases:
-            if not release.get("enabled"):
-                print(f"Skipping disabled release {version}")
-                continue
-
-            if not any(g["name"] == "All-users-of-AutoProxxy" for g in release.get("distribution_groups", [])):
-                print(f"Skipping non-production release {version}")
-                continue
-
             # Get release details from App Center API
             url = f"{self.app_center_api}/apps/{self.owner_name}/{self.app_name}/releases/{release['id']}"
             headers = {
