@@ -48,10 +48,10 @@ class Sparkling_Appcast_List_Renderer {
 	public function render_appcast( $data ) {
 		$track = Sparkling_Appcast_Taxonomy_Manager::get_instance()->get_track( $data['slug'] ?? '' );
 		if ( ! $track ) {
-			wp_die('Please set an existing track to filter');
+			wp_die( 'Please set an existing track to filter' );
 		}
 
-		$query = $this->sparkling_appcast_get_build_query( $track );
+		$query = $this->sparkling_appcast_get_build_query( $track, 10 );
 
 		$rss     = new SimpleXMLElement( '<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"/>' );
 		$channel = $rss->addChild( 'channel' );
@@ -72,10 +72,12 @@ class Sparkling_Appcast_List_Renderer {
 		echo $rss->asXML();
 	}
 
-	function sparkling_appcast_get_build_query( $track ) {
+	function sparkling_appcast_get_build_query( $track, $limit = null ) {
 		$args = array(
 			'post_type' => Sparkling_Appcast_Settings::CUSTOM_POST_TYPE,
-			'nopaging'  => true,
+			'nopaging'  => is_null( $limit ),
+			'orderby'   => 'date',
+			'order'     => 'DESC',
 			'tax_query' => array(
 				array(
 					'taxonomy' => Sparkling_Appcast_Taxonomy_Manager::TRACK_TAXONOMY_NAME,
@@ -84,6 +86,10 @@ class Sparkling_Appcast_List_Renderer {
 				)
 			)
 		);
+
+		if ( ! is_null( $limit ) ) {
+			$args['posts_per_page'] = $limit;
+		}
 
 		return new WP_Query( $args );
 	}

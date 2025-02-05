@@ -44,18 +44,24 @@ class Sparkling_Appcast_Renderer {
 		$attachment_meta = wp_get_attachment_metadata( $attachment_id );
 
 		$item->addChild( 'title', 'Version ' . esc_xml( $version ) . ' (' . esc_xml( $build_number ) . ')' );
-		// TODO: Convert markdown to HTML
-		$item->addChild( 'description', '<![CDATA[ ' . esc_xml( $description ) . ' ]]>' );
 		$item->addChild( 'sparkle:version', esc_xml( $build_number ), 'http://www.andymatuschak.org/xml-namespaces/sparkle' );
 		$item->addChild( 'sparkle:shortVersionString', esc_xml( $version ), 'http://www.andymatuschak.org/xml-namespaces/sparkle' );
 		$item->addChild( 'pubDate', get_the_time( DATE_RFC1123 ) );
 		$item->addChild( 'sparkle:minimumSystemVersion', esc_xml( $minVersion ), 'http://www.andymatuschak.org/xml-namespaces/sparkle' );
-		// TODO: Add ECDSA
+
+		// hacky workaround because CDATA isn't supported directly by SimpleXMLElement
+		$description_node = $item->addChild( 'description' );
+		$base             = dom_import_simplexml( $description_node );
+		$owner            = $base->ownerDocument;
+		// TODO: Convert $description markdown to HTML
+		$base->appendChild( $owner->createCDATASection( $description ) );
+
 		$enclosure = $item->addChild( 'enclosure' );
 		$enclosure->addAttribute( 'url', esc_url( $attachment_url ) );
 		$enclosure->addAttribute( 'length', esc_attr( $attachment_meta['filesize'] ) );
 		$enclosure->addAttribute( 'type', 'application/octet-stream' );
 
+		// TODO: Add ECDSA
 		return $item;
 	}
 }
