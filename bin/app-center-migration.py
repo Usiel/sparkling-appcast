@@ -7,6 +7,8 @@ import argparse
 from urllib.parse import urlparse
 from pprint import pprint
 
+# TODO: Rewrite this to PHP and embed it as a migration tool in wp-admin.
+
 class AppCenterMigration:
     def __init__(self, owner_name: str, app_name: str, wp_url: str, track_id: int):
         # App Center vars
