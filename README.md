@@ -89,3 +89,29 @@ curl --location 'localhost:8088/wp-json/wp/v2/sappcast_app_build' \
 
 The user may now go to "App Build" on wp-admin and publish the draft after verifying the build. After publishing the
 build will appear on the relevant appcast (`/wp-json/sparkling-appcast/v1/track/<track-id-or-slug>/appcast.xml`).
+
+## Migration from MS App Center
+
+Sparkling Appcast supports an automated migration from MS App Center to WP using `bin/app-center-migration.py`.
+
+```bash
+export APP_CENTER_TOKEN="..."
+export WP_USER="..."
+export WP_APP_PASSWORD="..."
+
+python bin/app-center-migration.py \
+    --owner "owner-name" \
+    --app "app-name" \
+    --wp-url "https://your-wp-site.com" \
+    --track-id 123
+```
+
+## Features
+
+Feel free to submit issues or PRs to implement features such as
+
+- ECDSA signature support
+- Automated migration from MS App Center to WP using Sparkling Appcast (currently supported via `bin/app-center-migration.py`)
+- Support additional custom `sparkle:` elements (e.g. `phasedRolloutInterval`, `channel`, ...)
+- Optimized UI for humans (wp-admin)
+- Custom role support for uploaders
