@@ -35,7 +35,7 @@
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="sparkling-appcast-plugin"/>
+			<property name="text_domain" type="array" value="sparkling-appcast"/>
 		</properties>
 	</rule>
 	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">

@@ -47,12 +47,12 @@ class Sparkling_Appcast_Type_Manager {
 			Sparkling_Appcast_Settings::CUSTOM_POST_TYPE,
 			array(
 				'labels'       => array(
-					'name'          => __( 'App Builds', 'sparkling-appcast-plugin' ),
-					'singular_name' => __( 'App Build', 'sparkling-appcast-plugin' ),
-					'add_new'       => __( 'Add New App Build', 'sparkling-appcast-plugin' ),
-					'add_new_item'  => __( 'Add New App Build', 'sparkling-appcast-plugin' ),
-					'edit_item'     => __( 'Edit App Build', 'sparkling-appcast-plugin' ),
-					'new_item'      => __( 'New App Build', 'sparkling-appcast-plugin' ),
+					'name'          => __( 'App Builds', 'sparkling-appcast' ),
+					'singular_name' => __( 'App Build', 'sparkling-appcast' ),
+					'add_new'       => __( 'Add New App Build', 'sparkling-appcast' ),
+					'add_new_item'  => __( 'Add New App Build', 'sparkling-appcast' ),
+					'edit_item'     => __( 'Edit App Build', 'sparkling-appcast' ),
+					'new_item'      => __( 'New App Build', 'sparkling-appcast' ),
 				),
 				'public'       => true,
 				'supports'     => array( 'custom-fields', 'attachment' ),

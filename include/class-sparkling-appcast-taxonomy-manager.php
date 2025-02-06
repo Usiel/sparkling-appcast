@@ -42,15 +42,15 @@ class Sparkling_Appcast_Taxonomy_Manager {
 	 */
 	public function register_track() {
 		$labels = array(
-			'name'          => _x( 'Release Tracks', 'taxonomy general name', 'sparkling-appcast-plugin' ),
-			'singular_name' => _x( 'Release Track', 'taxonomy singular name', 'sparkling-appcast-plugin' ),
-			'search_items'  => __( 'Search Tracks', 'sparkling-appcast-plugin' ),
-			'all_items'     => __( 'All Tracks', 'sparkling-appcast-plugin' ),
-			'edit_item'     => __( 'Edit Track', 'sparkling-appcast-plugin' ),
-			'update_item'   => __( 'Update Track', 'sparkling-appcast-plugin' ),
-			'add_new_item'  => __( 'Add New Track', 'sparkling-appcast-plugin' ),
-			'new_item_name' => __( 'New Track Name', 'sparkling-appcast-plugin' ),
-			'menu_name'     => __( 'Tracks', 'sparkling-appcast-plugin' ),
+			'name'          => _x( 'Release Tracks', 'taxonomy general name', 'sparkling-appcast' ),
+			'singular_name' => _x( 'Release Track', 'taxonomy singular name', 'sparkling-appcast' ),
+			'search_items'  => __( 'Search Tracks', 'sparkling-appcast' ),
+			'all_items'     => __( 'All Tracks', 'sparkling-appcast' ),
+			'edit_item'     => __( 'Edit Track', 'sparkling-appcast' ),
+			'update_item'   => __( 'Update Track', 'sparkling-appcast' ),
+			'add_new_item'  => __( 'Add New Track', 'sparkling-appcast' ),
+			'new_item_name' => __( 'New Track Name', 'sparkling-appcast' ),
+			'menu_name'     => __( 'Tracks', 'sparkling-appcast' ),
 		);
 		$args   = array(
 			'hierarchical'      => false,

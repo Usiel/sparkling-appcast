@@ -9,18 +9,6 @@
  * @package Sparkling_Appcast
  */
 
-if ( version_compare( PHP_VERSION, '8.0', '<' ) ) {
-	add_action(
-		'admin_notices',
-		function () {
-			echo '<div class="error"><p>' .
-			esc_html__( 'Sparkling Appcast requires PHP 8.0 or higher.', 'sparkling-appcast-plugin' ) .
-			'</p></div>';
-		}
-	);
-	return;
-}
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
