@@ -53,6 +53,12 @@ If you have multiple tracks besides Production, you can should add them on wp-ad
 
 ## Usage
 
+### Fastlane
+
+We recommend you use the [`wp_sparkling_appcast` plugin](https://github.com/Usiel/fastlane-plugin-wp_sparkling_appcast) to upload assets and create builds.
+
+### Other
+
 To distribute a new build, you must upload the asset (1), create a build draft (2), after which you can finalize the
 build and publish it (3). Steps 1 and 2 are typically executed by your build server, while step 3 is done by a human.
 
