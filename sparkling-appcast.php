@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sparkling Appcast
  * Description: Sparkling Appcast allows your WP site to distribute macOS Apps via Sparkle's appcast.xml.
- * Version: 0.4
+ * Version: 0.5
  * Author: usielriedl
  * License: GPLv2
  *
