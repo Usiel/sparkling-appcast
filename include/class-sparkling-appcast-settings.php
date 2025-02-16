@@ -5,6 +5,10 @@
  * @package Sparkling_Appcast
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
  // phpcs:disable Universal.Files.SeparateFunctionsFromOO
 
 /**
@@ -20,7 +24,7 @@ class Sparkling_Appcast_Settings {
 	 * @return string The app name.
 	 */
 	public static function get_app_name() {
-		return get_option( 'sparkling_appcast_app_name', 'MyAppName' );
+		return get_option( 'sappcast_app_name', 'MyAppName' );
 	}
 
 	const CUSTOM_POST_TYPE = 'sappcast_app_build';
@@ -47,11 +51,11 @@ class Sparkling_Appcast_Settings {
  */
 function sparkling_appcast_add_admin_menu() {
 	add_submenu_page(
-		'edit.php?post_type=sappcast_app_build',
+		'edit.php?post_type=' . Sparkling_Appcast_Settings::CUSTOM_POST_TYPE,
 		'App Settings',
 		'App Settings',
 		'manage_options',
-		'sparkling_appcast_options_page',
+		'sappcast_options_page',
 		'sparkling_appcast_options_page'
 	);
 }
@@ -64,7 +68,7 @@ function sparkling_appcast_add_admin_menu() {
 function sparkling_appcast_settings_init() {
 	register_setting(
 		'sparkling_appcast',
-		'sparkling_appcast_app_name',
+		'sappcast_app_name',
 		array(
 			'type'              => 'string',
 			'sanitize_callback' => 'sparkling_appcast_sanitize_text_field',
@@ -73,18 +77,18 @@ function sparkling_appcast_settings_init() {
 	);
 
 	add_settings_section(
-		'sparkling_appcast_section',
+		'sappcast_section',
 		'Sparkling Appcast Settings',
 		null,
 		'sparkling_appcast'
 	);
 
 	add_settings_field(
-		'sparkling_appcast_app_name',
+		'sappcast_app_name',
 		'Application Name',
 		'sparkling_appcast_app_name_render',
 		'sparkling_appcast',
-		'sparkling_appcast_section'
+		'sappcast_section'
 	);
 }
 
@@ -115,7 +119,7 @@ function sparkling_appcast_options_page() {
  */
 function sparkling_appcast_app_name_render() {
 	$value = Sparkling_Appcast_Settings::get_app_name();
-	echo '<input type="text" id="sparkling_appcast_app_name" name="sparkling_appcast_app_name" value="' . esc_attr( $value ) . '" required />';
+	echo '<input type="text" id="sappcast_app_name" name="sappcast_app_name" value="' . esc_attr( $value ) . '" required />';
 }
 
 /**
@@ -127,7 +131,7 @@ function sparkling_appcast_app_name_render() {
 function sparkling_appcast_sanitize_text_field( $input ) {
 	$input = sanitize_text_field( $input );
 	if ( empty( $input ) ) {
-		add_settings_error( 'sparkling_appcast_app_name', 'empty-field', 'The field cannot be empty. The default value has been restored.' );
+		add_settings_error( 'sappcast_app_name', 'empty-field', 'The field cannot be empty. The default value has been restored.' );
 
 		return 'MyAppName';
 	}

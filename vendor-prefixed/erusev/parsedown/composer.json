@@ -20,7 +20,7 @@
         "phpunit/phpunit": "^4.8.35"
     },
     "autoload": {
-        "psr-0": {"Parsedown": ""}
+        "psr-0": {"Sparkling_Appcast_Parsedown": ""}
     },
     "autoload-dev": {
         "psr-0": {

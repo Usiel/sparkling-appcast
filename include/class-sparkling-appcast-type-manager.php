@@ -5,6 +5,10 @@
  * @package Sparkling_Appcast
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Required for a few constants.
  */

@@ -2,7 +2,7 @@
 
 #
 #
-# Parsedown
+# Sparkling_Appcast_Parsedown
 # http://parsedown.org
 #
 # (c) Emanuil Rusev
@@ -13,7 +13,7 @@
 #
 #
 
-class Parsedown
+class Sparkling_Appcast_Parsedown
 {
     # ~
 

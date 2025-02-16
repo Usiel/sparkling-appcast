@@ -5,6 +5,10 @@
  * @package Sparkling_Appcast
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * This file contains the class that manages registration, validation,
  * and handling of the taxonomy for app builds.

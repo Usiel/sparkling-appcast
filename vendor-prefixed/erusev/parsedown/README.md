@@ -1,6 +1,6 @@
 > I also make [Caret](https://caret.io?ref=parsedown) - a Markdown editor for Mac and PC.
 
-## Parsedown
+## Sparkling_Appcast_Parsedown
 
 [![Build Status](https://img.shields.io/travis/erusev/parsedown/master.svg?style=flat-square)](https://travis-ci.org/erusev/parsedown)
 <!--[![Total Downloads](http://img.shields.io/packagist/dt/erusev/parsedown.svg?style=flat-square)](https://packagist.org/packages/erusev/parsedown)-->
@@ -24,25 +24,25 @@ Better Markdown Parser in PHP
 
 ### Installation
 
-Include `Parsedown.php` or install [the composer package](https://packagist.org/packages/erusev/parsedown).
+Include `Sparkling_Appcast_Parsedown.php` or install [the composer package](https://packagist.org/packages/erusev/parsedown).
 
 ### Example
 
 ``` php
-$Parsedown = new Parsedown();
+$Parsedown = new Sparkling_Appcast_Parsedown();
 
-echo $Parsedown->text('Hello _Parsedown_!'); # prints: <p>Hello <em>Parsedown</em>!</p>
+echo $Parsedown->text('Hello _Parsedown_!'); # prints: <p>Hello <em>Sparkling_Appcast_Parsedown</em>!</p>
 ```
 
 More examples in [the wiki](https://github.com/erusev/parsedown/wiki/) and in [this video tutorial](http://youtu.be/wYZBY8DEikI).
 
 ### Security
 
-Parsedown is capable of escaping user-input within the HTML that it generates. Additionally Parsedown will apply sanitisation to additional scripting vectors (such as scripting link destinations) that are introduced by the markdown syntax itself.
+Sparkling_Appcast_Parsedown is capable of escaping user-input within the HTML that it generates. Additionally Sparkling_Appcast_Parsedown will apply sanitisation to additional scripting vectors (such as scripting link destinations) that are introduced by the markdown syntax itself.
 
-To tell Parsedown that it is processing untrusted user-input, use the following:
+To tell Sparkling_Appcast_Parsedown that it is processing untrusted user-input, use the following:
 ```php
-$parsedown = new Parsedown;
+$parsedown = new Sparkling_Appcast_Parsedown;
 $parsedown->setSafeMode(true);
 ```
 
@@ -50,16 +50,16 @@ If instead, you wish to allow HTML within untrusted user-input, but still want o
 
 In both cases you should strongly consider employing defence-in-depth measures, like [deploying a Content-Security-Policy](https://scotthelme.co.uk/content-security-policy-an-introduction/) (a browser security feature) so that your page is likely to be safe even if an attacker finds a vulnerability in one of the first lines of defence above.
 
-#### Security of Parsedown Extensions
+#### Security of Sparkling_Appcast_Parsedown Extensions
 
-Safe mode does not necessarily yield safe results when using extensions to Parsedown. Extensions should be evaluated on their own to determine their specific safety against XSS.
+Safe mode does not necessarily yield safe results when using extensions to Sparkling_Appcast_Parsedown. Extensions should be evaluated on their own to determine their specific safety against XSS.
 
 ### Escaping HTML
 > ⚠️  **WARNING:** This method isn't safe from XSS!
 
 If you wish to escape HTML **in trusted input**, you can use the following:
 ```php
-$parsedown = new Parsedown;
+$parsedown = new Sparkling_Appcast_Parsedown;
 $parsedown->setMarkupEscaped(true);
 ```
 
@@ -67,11 +67,11 @@ Beware that this still allows users to insert unsafe scripting vectors, such as 
 
 ### Questions
 
-**How does Parsedown work?**
+**How does Sparkling_Appcast_Parsedown work?**
 
 It tries to read Markdown like a human. First, it looks at the lines. It’s interested in how the lines start. This helps it recognise blocks. It knows, for example, that if a line starts with a `-` then perhaps it belongs to a list. Once it recognises the blocks, it continues to the content. As it reads, it watches out for special characters. This helps it recognise inline elements (or inlines).
 
-We call this approach "line based". We believe that Parsedown is the first Markdown parser to use it. Since the release of Parsedown, other developers have used the same approach to develop other Markdown parsers in PHP and in other languages.
+We call this approach "line based". We believe that Sparkling_Appcast_Parsedown is the first Markdown parser to use it. Since the release of Sparkling_Appcast_Parsedown, other developers have used the same approach to develop other Markdown parsers in PHP and in other languages.
 
 **Is it compliant with CommonMark?**
 

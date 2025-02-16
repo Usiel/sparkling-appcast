@@ -1,11 +1,36 @@
 {
-    "require-dev": {
-        "wp-coding-standards/wpcs": "^3.0",
-        "phpcompatibility/phpcompatibility-wp": "*"
-    },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^3.0",
+    "phpcompatibility/phpcompatibility-wp": "*"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
+  },
+  "require": {
+    "erusev/parsedown": "^1.7"
+  },
+  "scripts": {
+    "prefix-namespaces": [
+      "sh -c 'test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/latest/download/strauss.phar'",
+      "@php bin/strauss.phar",
+      "@composer dump-autoload"
+    ],
+    "post-install-cmd": [
+      "@prefix-namespaces"
+    ],
+    "post-update-cmd": [
+      "@prefix-namespaces"
+    ]
+  },
+  "extra": {
+    "strauss": {
+      "namespace_prefix": "Sparkling_Appcast\\",
+      "classmap_prefix": "Sparkling_Appcast_",
+      "constant_prefix": "SPARKLING_APPCAST_",
+      "delete_vendor_packages": false,
+      "delete_vendor_files": false
+    }
+  }
 }

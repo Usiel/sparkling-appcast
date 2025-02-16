@@ -5,6 +5,10 @@
  * @package Sparkling_Appcast
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Required for a few constants and access to tracks.
  */
@@ -54,7 +58,7 @@ class Sparkling_Appcast_List_Renderer {
 			return 'Please set an existing track to filter';
 		}
 
-		$query = $this->sparkling_appcast_get_build_query( $track );
+		$query = $this->get_build_query( $track );
 
 		$output = '<h1>' . esc_html( Sparkling_Appcast_Settings::get_app_name() ) . ' (' . $track->name . ')</h1>';
 
@@ -88,13 +92,13 @@ class Sparkling_Appcast_List_Renderer {
 			wp_die( 'Please set an existing track to filter' );
 		}
 
-		$query = $this->sparkling_appcast_get_build_query( $track, 10 );
+		$query = $this->get_build_query( $track, 10 );
 
 		$rss     = new SimpleXMLElement( '<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"/>' );
 		$channel = $rss->addChild( 'channel' );
-		$channel->addChild( 'title', Sparkling_Appcast_Settings::get_app_name() . ' - ' . $track->name );
+		$channel->addChild( 'title', esc_xml( Sparkling_Appcast_Settings::get_app_name() . ' - ' . $track->name ) );
 		global $wp;
-		$channel->addChild( 'link', '/' . $wp->request );
+		$channel->addChild( 'link', esc_xml( '/' . $wp->request ) );
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {
@@ -106,6 +110,7 @@ class Sparkling_Appcast_List_Renderer {
 
 		// Set the response to include XML headers and XML body.
 		header( 'Content-Type: application/xml' );
+		// Attributes and text of any tag within $rss is escaped.
 		echo $rss->asXML(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
@@ -116,7 +121,7 @@ class Sparkling_Appcast_List_Renderer {
 	 * @param int|null $limit The limit.
 	 * @return WP_Query The build query.
 	 */
-	private function sparkling_appcast_get_build_query( $track, $limit = null ) {
+	private function get_build_query( $track, $limit = null ) {
 		$args = array(
 			'post_type' => Sparkling_Appcast_Settings::CUSTOM_POST_TYPE,
 			'nopaging'  => is_null( $limit ),

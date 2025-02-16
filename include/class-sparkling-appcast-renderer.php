@@ -5,11 +5,14 @@
  * @package Sparkling_Appcast
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Required for a few constants and markdown->HTML conversion.
  */
 require_once __DIR__ . '/class-sparkling-appcast-settings.php';
-require_once __DIR__ . '/../lib/parsedown-1.7.4/Parsedown.php';
 
 /**
  * Renderer for app builds.
@@ -78,7 +81,7 @@ class Sparkling_Appcast_Renderer {
 		$version          = get_post_meta( $this->post_id, Sparkling_Appcast_Settings::VERSION_FIELD, true );
 		$build_number     = get_post_meta( $this->post_id, Sparkling_Appcast_Settings::BUILD_NUMBER_FIELD, true );
 		$description      = get_post_meta( $this->post_id, Sparkling_Appcast_Settings::CHANGELOG_FIELD, true );
-		$html_description = wp_kses_post( ( new Parsedown() )->text( $description ) );
+		$html_description = wp_kses_post( ( new \Sparkling_Appcast_Parsedown() )->text( $description ) );
 		$attachment_id    = get_post_meta( $this->post_id, Sparkling_Appcast_Settings::ATTACHMENT_FIELD, true );
 		$min_version      = get_post_meta( $this->post_id, Sparkling_Appcast_Settings::MIN_SYSTEM_VERSION_FIELD, true );
 		$attachment_url   = wp_get_attachment_url( $attachment_id );

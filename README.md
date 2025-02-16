@@ -6,7 +6,7 @@ Sparkling Appcast is a WordPress plugin. It allows you to use your WordPress sit
 Sparkling Appcast exposes a new shortcode to display a list of app builds.
 
 ```
-[sparkling_appcast_display_builds sappcast_track="{track-id-or-slug}"]
+[sappcast_display_builds sappcast_track="{track-id-or-slug}"]
 ```
 
 ![image](https://github.com/user-attachments/assets/91388833-5935-4ce9-a18e-10857913f830)

@@ -49,3 +49,5 @@ wp-config.php
 
 .circleci
 vendor/
+bin/strauss.phar
+bin/install.sh

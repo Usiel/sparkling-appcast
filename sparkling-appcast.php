@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sparkling Appcast
  * Description: Sparkling Appcast allows your WP site to distribute macOS Apps via Sparkle's appcast.xml.
- * Version: 0.3
+ * Version: 0.4
  * Author: usielriedl
  * License: GPLv2
  *
@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+require_once __DIR__ . '/vendor-prefixed/autoload.php';
 require_once __DIR__ . '/include/class-sparkling-appcast-list-renderer.php';
 require_once __DIR__ . '/include/class-sparkling-appcast-renderer.php';
 require_once __DIR__ . '/include/class-sparkling-appcast-settings.php';
@@ -29,7 +30,7 @@ add_action( 'init', array( Sparkling_Appcast_Type_Manager::get_instance(), 'regi
  */
 function sparkling_appcast_register_build_shortcode() {
 	add_shortcode(
-		'sparkling_appcast_display_builds',
+		'sappcast_display_builds',
 		array(
 			Sparkling_Appcast_List_Renderer::get_instance(),
 			'get_html',
@@ -37,7 +38,7 @@ function sparkling_appcast_register_build_shortcode() {
 	);
 }
 
-// enable [sparkling_appcast_display_builds sappcast_track="<track_id|track_slug>"] for pretty App Builds.
+// enable [sappcast_display_builds sappcast_track="<track_id|track_slug>"] for pretty App Builds.
 add_action( 'init', 'sparkling_appcast_register_build_shortcode' );
 
 // custom taxonomy to represent tracks (e.g. Production & Alpha).
@@ -131,4 +132,4 @@ add_action(
 	}
 );
 
-add_filter( 'sparkling_appcast_build_content', 'the_content' );
+add_filter( 'sappcast_build_content', 'the_content' );
