@@ -126,6 +126,8 @@ add_action(
 				array(
 					'methods'  => 'GET',
 					'callback' => array( Sparkling_Appcast_List_Renderer::get_instance(), 'render_appcast' ),
+					// allow anyone to access the appcast.
+					'permission_callback' => '__return_true',
 				)
 			);
 		}
