@@ -51,3 +51,4 @@ wp-config.php
 vendor/
 bin/strauss.phar
 bin/install.sh
+svn/
