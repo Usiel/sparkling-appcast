@@ -13,17 +13,18 @@ Sparkling Appcast exposes a new shortcode to display a list of app builds.
 
 ![image](https://github.com/user-attachments/assets/91388833-5935-4ce9-a18e-10857913f830)
 
-Configure Sparkle to ingest the appcast.xml at https://your.site/wp-json/sparkling-appcast/v1/channel/{channel-id-or-slug}/appcast.xml.
+Configure Sparkle to ingest the appcast.xml at https://your.site/wp-json/sparkling-appcast/v1/appcast.xml.
 You will see something like the following XML.
 
 ```xml
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
     <channel>
-        <title>MyApp - Production</title>
-        <link>/wp-json/sparkling-appcast/v1/channel/production/appcast.xml</link>
+        <title>MyApp</title>
+        <link>/wp-json/sparkling-appcast/v1/appcast.xml</link>
         <item>
             <title>Version 1.0.1 (2)</title>
-            <description><![CDATA[ This version is better! ]]></description>
+            <description><![CDATA[ This version is better but not yet released! ]]></description>
+            <sparkle:channel>Alpha</sparkle:channel>
             <sparkle:version>2</sparkle:version>
             <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
             <pubDate>Wed, 08 Jan 2025 08:56:19 +0000</pubDate>
@@ -49,7 +50,7 @@ To get started name the application you want to distribute on your WordPress sit
 
 ![image](https://github.com/user-attachments/assets/ff54e6b7-9bbc-47bf-b7fa-207d627ed548)
 
-If you have multiple channels besides Production, you can should add them on wp-admin under the App Builds menu.
+If you have multiple channels besides `stable`, you can should add them on wp-admin under the App Builds menu.
 
 ![image](https://github.com/user-attachments/assets/92b3c0f5-a993-4b5e-af62-2aae132a978e)
 
@@ -96,7 +97,7 @@ curl --location 'localhost:8088/wp-json/wp/v2/sappcast_app_build' \
 ### 3. Publish Build
 
 The user may now go to "App Build" on wp-admin and publish the draft after verifying the build. After publishing the
-build will appear on the relevant appcast (`/wp-json/sparkling-appcast/v1/channel/<channel-id-or-slug>/appcast.xml`).
+build will appear on the relevant appcast (`/wp-json/sparkling-appcast/v1/appcast.xml`).
 
 ## Migration from MS App Center
 

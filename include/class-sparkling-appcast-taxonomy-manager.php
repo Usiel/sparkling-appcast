@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Sparkling_Appcast_Taxonomy_Manager {
 
 	const CHANNEL_TAXONOMY_NAME = 'sappcast_channel';
+	const DEFAULT_CHANNEL = 'stable';
 
 	/**
 	 * Singleton instance of this class.
@@ -66,9 +67,9 @@ class Sparkling_Appcast_Taxonomy_Manager {
 			'show_tagcloud'     => false,
 			'rewrite'           => array( 'slug' => 'channel' ),
 			'default_term'      => array(
-				'name'        => 'Production',
-				'slug'        => 'production',
-				'description' => 'Production Release Channel',
+				'name'        => self::DEFAULT_CHANNEL,
+				'slug'        => 'stable',
+				'description' => 'Stable Release Channel',
 			),
 		);
 		register_taxonomy( self::CHANNEL_TAXONOMY_NAME, array( Sparkling_Appcast_Settings::CUSTOM_POST_TYPE ), $args );
@@ -79,6 +80,7 @@ class Sparkling_Appcast_Taxonomy_Manager {
 	 * Gets a channel by ID or slug.
 	 *
 	 * @param int|string $channel_arg The channel ID or slug.
+	 *
 	 * @return WP_Term|false The channel term or false if not found.
 	 */
 	public function get_channel( $channel_arg ) {

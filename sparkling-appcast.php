@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sparkling Appcast
  * Description: Sparkling Appcast allows your WP site to distribute macOS Apps via Sparkle's appcast.xml.
- * Version: 0.6
+ * Version: 0.7
  * Author: usielriedl
  * License: GPLv2
  *
@@ -41,7 +41,7 @@ function sparkling_appcast_register_build_shortcode() {
 // enable [sappcast_display_builds sappcast_channel="<channel_id|channel_slug>"] for pretty App Builds.
 add_action( 'init', 'sparkling_appcast_register_build_shortcode' );
 
-// custom taxonomy to represent channels (e.g. Production & Alpha).
+// custom taxonomy to represent channels (e.g. stable & alpha).
 add_action(
 	'init',
 	array(
@@ -97,6 +97,7 @@ add_action(
  * Generates content for app build pages.
  *
  * @param string $content The post content.
+ *
  * @return string Modified content for app build pages.
  */
 function sparkling_appcast_generate_app_build_content( $content ) {
@@ -118,19 +119,16 @@ add_action( 'admin_init', 'sparkling_appcast_settings_init' );
 add_action(
 	'rest_api_init',
 	function () {
-		$channels = Sparkling_Appcast_Taxonomy_Manager::get_instance()->get_channels();
-		foreach ( $channels as $channel ) {
-			register_rest_route(
-				'sparkling-appcast/v1',
-				'/channel/(?P<slug>.+)/appcast.xml',
-				array(
-					'methods'             => 'GET',
-					'callback'            => array( Sparkling_Appcast_List_Renderer::get_instance(), 'render_appcast' ),
-					// allow anyone to access the appcast.
-					'permission_callback' => '__return_true',
-				)
-			);
-		}
+		register_rest_route(
+			'sparkling-appcast/v1',
+			'/appcast.xml',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( Sparkling_Appcast_List_Renderer::get_instance(), 'render_appcast' ),
+				// allow anyone to access the appcast.
+				'permission_callback' => '__return_true',
+			)
+		);
 	}
 );
 
