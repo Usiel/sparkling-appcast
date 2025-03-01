@@ -10,7 +10,7 @@ from pprint import pprint
 # TODO: Rewrite this to PHP and embed it as a migration tool in wp-admin.
 
 class AppCenterMigration:
-    def __init__(self, owner_name: str, app_name: str, wp_url: str, track_id: int):
+    def __init__(self, owner_name: str, app_name: str, wp_url: str, channel_id: int):
         # App Center vars
         self.app_center_api = "https://api.appcenter.ms/v0.1"
         self.owner_name = owner_name
@@ -21,7 +21,7 @@ class AppCenterMigration:
             raise ValueError("APP_CENTER_TOKEN environment variable is required")
 
         # WP Sparkling Appcast vars
-        self.production_track_id = track_id
+        self.production_channel_id = channel_id
 
         wp_user = os.environ.get("WP_USER")
         wp_app_password = os.environ.get("WP_APP_PASSWORD")
@@ -99,7 +99,7 @@ class AppCenterMigration:
                 "sappcast_app_build_changelog": changelog,
             },
             "date": uploaded_at,
-            "sappcast_track": self.production_track_id,
+            "sappcast_channel": self.production_channel_id,
             "status": "draft"
         }
 
@@ -185,8 +185,8 @@ if __name__ == "__main__":
     parser.add_argument("--owner", required=True, help="App Center organization name")
     parser.add_argument("--app", required=True, help="App Center application name")
     parser.add_argument("--wp-url", required=True, help="WordPress site URL")
-    parser.add_argument("--track-id", type=int, default=1,
-                       help="WordPress Sparkling Appcast track ID (default: 1)")
+    parser.add_argument("--channel-id", type=int, default=1,
+                       help="WordPress Sparkling Appcast channel ID (default: 1)")
 
     args = parser.parse_args()
 
@@ -195,7 +195,7 @@ if __name__ == "__main__":
         parser.error("Invalid WordPress URL. Must include scheme (http:// or https://)")
 
     try:
-        migrator = AppCenterMigration(args.owner, args.app, args.wp_url, args.track_id)
+        migrator = AppCenterMigration(args.owner, args.app, args.wp_url, args.channel_id)
         migrator.migrate_releases()
     except ValueError as e:
         print(f"Configuration error: {str(e)}")

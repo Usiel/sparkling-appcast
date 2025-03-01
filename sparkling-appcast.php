@@ -38,15 +38,15 @@ function sparkling_appcast_register_build_shortcode() {
 	);
 }
 
-// enable [sappcast_display_builds sappcast_track="<track_id|track_slug>"] for pretty App Builds.
+// enable [sappcast_display_builds sappcast_channel="<channel_id|channel_slug>"] for pretty App Builds.
 add_action( 'init', 'sparkling_appcast_register_build_shortcode' );
 
-// custom taxonomy to represent tracks (e.g. Production & Alpha).
+// custom taxonomy to represent channels (e.g. Production & Alpha).
 add_action(
 	'init',
 	array(
 		Sparkling_Appcast_Taxonomy_Manager::get_instance(),
-		'register_track',
+		'register_channel',
 	)
 );
 
@@ -118,11 +118,11 @@ add_action( 'admin_init', 'sparkling_appcast_settings_init' );
 add_action(
 	'rest_api_init',
 	function () {
-		$tracks = Sparkling_Appcast_Taxonomy_Manager::get_instance()->get_tracks();
-		foreach ( $tracks as $track ) {
+		$channels = Sparkling_Appcast_Taxonomy_Manager::get_instance()->get_channels();
+		foreach ( $channels as $channel ) {
 			register_rest_route(
 				'sparkling-appcast/v1',
-				'/track/(?P<slug>.+)/appcast.xml',
+				'/channel/(?P<slug>.+)/appcast.xml',
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( Sparkling_Appcast_List_Renderer::get_instance(), 'render_appcast' ),

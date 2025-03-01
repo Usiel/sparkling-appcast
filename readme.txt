@@ -10,22 +10,22 @@ Sparkling Appcast allows you to use your WordPress site to distribute your macOS
 == Description ==
 
 Sparkling Appcast is a WordPress plugin. It allows you to use your WordPress site to distribute your macOS App via
-[Sparkle](https://sparkle-project.org/). Sparkling Appcast supports multiple tracks (alpha, beta, ...).
+[Sparkle](https://sparkle-project.org/). Sparkling Appcast supports multiple channels (alpha, beta, ...).
 
 Sparkling Appcast exposes a new shortcode to display a list of app builds.
 
 ```
-[sappcast_display_builds sappcast_track="{track-id-or-slug}"]
+[sappcast_display_builds sappcast_channel="{channel-id-or-slug}"]
 ```
 
-Configure Sparkle to ingest the appcast.xml at https://your.site/wp-json/sparkling-appcast/v1/track/{track-id-or-slug}/appcast.xml.
+Configure Sparkle to ingest the appcast.xml at https://your.site/wp-json/sparkling-appcast/v1/channel/{channel-id-or-slug}/appcast.xml.
 You will see something like the following XML.
 
 ```xml
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
     <channel>
         <title>MyApp - Production</title>
-        <link>/wp-json/sparkling-appcast/v1/track/production/appcast.xml</link>
+        <link>/wp-json/sparkling-appcast/v1/channel/production/appcast.xml</link>
         <item>
             <title>Version 1.0.1 (2)</title>
             <description><![CDATA[ This version is better! ]]></description>
@@ -54,7 +54,7 @@ To get started name the application you want to distribute on your WordPress sit
 
 ![image](https://github.com/user-attachments/assets/ff54e6b7-9bbc-47bf-b7fa-207d627ed548)
 
-If you have multiple tracks besides Production, you can should add them on wp-admin under the App Builds menu.
+If you have multiple channels besides Production, you can should add them on wp-admin under the App Builds menu.
 
 ![image](https://github.com/user-attachments/assets/92b3c0f5-a993-4b5e-af62-2aae132a978e)
 
@@ -93,7 +93,7 @@ curl --location 'localhost:8088/wp-json/wp/v2/sappcast_app_build' \
             "sappcast_app_build_attachment_id": int,
             "sappcast_app_build_changelog": string,
         },
-        "sappcast_track": int,
+        "sappcast_channel": int,
         "status": "draft"
     }'
 ```
@@ -101,4 +101,4 @@ curl --location 'localhost:8088/wp-json/wp/v2/sappcast_app_build' \
 ### 3. Publish Build
 
 The user may now go to "App Build" on wp-admin and publish the draft after verifying the build. After publishing the
-build will appear on the relevant appcast (`/wp-json/sparkling-appcast/v1/track/<track-id-or-slug>/appcast.xml`).
+build will appear on the relevant appcast (`/wp-json/sparkling-appcast/v1/channel/<channel-id-or-slug>/appcast.xml`).

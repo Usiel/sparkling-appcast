@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Sparkling_Appcast_Taxonomy_Manager {
 
-	const TRACK_TAXONOMY_NAME = 'sappcast_track';
+	const CHANNEL_TAXONOMY_NAME = 'sappcast_channel';
 
 	/**
 	 * Singleton instance of this class.
@@ -40,21 +40,21 @@ class Sparkling_Appcast_Taxonomy_Manager {
 	}
 
 	/**
-	 * Register the track taxonomy.
+	 * Register the channel taxonomy.
 	 *
 	 * @return void
 	 */
-	public function register_track() {
+	public function register_channel() {
 		$labels = array(
-			'name'          => _x( 'Release Tracks', 'taxonomy general name', 'sparkling-appcast' ),
-			'singular_name' => _x( 'Release Track', 'taxonomy singular name', 'sparkling-appcast' ),
-			'search_items'  => __( 'Search Tracks', 'sparkling-appcast' ),
-			'all_items'     => __( 'All Tracks', 'sparkling-appcast' ),
-			'edit_item'     => __( 'Edit Track', 'sparkling-appcast' ),
-			'update_item'   => __( 'Update Track', 'sparkling-appcast' ),
-			'add_new_item'  => __( 'Add New Track', 'sparkling-appcast' ),
-			'new_item_name' => __( 'New Track Name', 'sparkling-appcast' ),
-			'menu_name'     => __( 'Tracks', 'sparkling-appcast' ),
+			'name'          => _x( 'Release Channels', 'taxonomy general name', 'sparkling-appcast' ),
+			'singular_name' => _x( 'Release Channel', 'taxonomy singular name', 'sparkling-appcast' ),
+			'search_items'  => __( 'Search Channels', 'sparkling-appcast' ),
+			'all_items'     => __( 'All Channels', 'sparkling-appcast' ),
+			'edit_item'     => __( 'Edit Channel', 'sparkling-appcast' ),
+			'update_item'   => __( 'Update Channel', 'sparkling-appcast' ),
+			'add_new_item'  => __( 'Add New Channel', 'sparkling-appcast' ),
+			'new_item_name' => __( 'New Channel Name', 'sparkling-appcast' ),
+			'menu_name'     => __( 'Channels', 'sparkling-appcast' ),
 		);
 		$args   = array(
 			'hierarchical'      => false,
@@ -64,44 +64,44 @@ class Sparkling_Appcast_Taxonomy_Manager {
 			'show_in_rest'      => true,
 			'query_var'         => true,
 			'show_tagcloud'     => false,
-			'rewrite'           => array( 'slug' => 'track' ),
+			'rewrite'           => array( 'slug' => 'channel' ),
 			'default_term'      => array(
 				'name'        => 'Production',
 				'slug'        => 'production',
-				'description' => 'Production Release Track',
+				'description' => 'Production Release Channel',
 			),
 		);
-		register_taxonomy( self::TRACK_TAXONOMY_NAME, array( Sparkling_Appcast_Settings::CUSTOM_POST_TYPE ), $args );
+		register_taxonomy( self::CHANNEL_TAXONOMY_NAME, array( Sparkling_Appcast_Settings::CUSTOM_POST_TYPE ), $args );
 	}
 
 
 	/**
-	 * Gets a track by ID or slug.
+	 * Gets a channel by ID or slug.
 	 *
-	 * @param int|string $track_arg The track ID or slug.
-	 * @return WP_Term|false The track term or false if not found.
+	 * @param int|string $channel_arg The channel ID or slug.
+	 * @return WP_Term|false The channel term or false if not found.
 	 */
-	public function get_track( $track_arg ) {
-		if ( is_numeric( $track_arg ) ) {
+	public function get_channel( $channel_arg ) {
+		if ( is_numeric( $channel_arg ) ) {
 			// assume search by id.
-			$track = get_term_by( 'id', (int) $track_arg, self::TRACK_TAXONOMY_NAME );
+			$channel = get_term_by( 'id', (int) $channel_arg, self::CHANNEL_TAXONOMY_NAME );
 		} else {
 			// assume search by slug.
-			$track = get_term_by( 'slug', $track_arg, self::TRACK_TAXONOMY_NAME );
+			$channel = get_term_by( 'slug', $channel_arg, self::CHANNEL_TAXONOMY_NAME );
 		}
 
-		return $track;
+		return $channel;
 	}
 
 	/**
-	 * Gets all tracks.
+	 * Gets all channels.
 	 *
-	 * @return array The tracks.
+	 * @return array The channels.
 	 */
-	public function get_tracks() {
+	public function get_channels() {
 		return get_terms(
 			array(
-				'taxonomy' => self::TRACK_TAXONOMY_NAME,
+				'taxonomy' => self::CHANNEL_TAXONOMY_NAME,
 			)
 		);
 	}
