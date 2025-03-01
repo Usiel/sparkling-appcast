@@ -14,14 +14,14 @@ Sparkling Appcast is a WordPress plugin. It allows you to use your WordPress sit
 
 Sparkling Appcast exposes a new shortcode to display a list of app builds.
 
-```
+`
 [sappcast_display_builds sappcast_channel="{channel-id-or-slug}"]
-```
+`
 
 Configure Sparkle to ingest the appcast.xml at https://your.site/wp-json/sparkling-appcast/v1/appcast.xml.
 You will see something like the following XML.
 
-```xml
+`
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
     <channel>
         <title>MyApp</title>
@@ -47,7 +47,7 @@ You will see something like the following XML.
         </item>
     </channel>
 </rss>
-```
+`
 
 ## Configuration
 
@@ -71,17 +71,17 @@ To distribute a new build, you must upload the asset (1), create a build draft (
 
 ### 1. Uploading Asset
 
-```bash
+`
 curl --location "localhost:8088/wp-json/wp/v2/media?status=publish&title=MyApp%20${VERSION}%20(${BUILD_NUMBER})" \
     --header "Content-Disposition: attachment; filename=\"myapp_v${VERSION}_${BUILD_NUMBER}.zip\"" \
     --header 'Content-Type: application/zip' \
     --user "${USER}:${APPLICATION_PASSWORD}" \
     --data-binary '@/path/to/asset.zip'
-```
+`
 
 ### 2. Create Build Draft
 
-```bash
+`
 curl --location 'localhost:8088/wp-json/wp/v2/sappcast_app_build' \
     --header 'Content-Type: application/json' \
     --user "${USER}:${APPLICATION_PASSWORD}" \
@@ -96,7 +96,7 @@ curl --location 'localhost:8088/wp-json/wp/v2/sappcast_app_build' \
         "sappcast_channel": int,
         "status": "draft"
     }'
-```
+`
 
 ### 3. Publish Build
 
