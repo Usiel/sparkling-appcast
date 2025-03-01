@@ -47,7 +47,8 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 
-.circleci
+.circleci/
+.vscode/
 vendor/
 bin/strauss.phar
 bin/install.sh
