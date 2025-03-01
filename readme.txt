@@ -9,8 +9,7 @@ Sparkling Appcast allows you to use your WordPress site to distribute your macOS
 
 == Description ==
 
-Sparkling Appcast is a WordPress plugin. It allows you to use your WordPress site to distribute your macOS App via
-[Sparkle](https://sparkle-project.org/). Sparkling Appcast supports multiple channels (alpha, beta, ...).
+Sparkling Appcast is a WordPress plugin. It allows you to use your WordPress site to distribute your macOS App via [Sparkle](https://sparkle-project.org/). Sparkling Appcast supports multiple channels (alpha, beta, ...).
 
 Sparkling Appcast exposes a new shortcode to display a list of app builds.
 
@@ -18,8 +17,7 @@ Sparkling Appcast exposes a new shortcode to display a list of app builds.
 [sappcast_display_builds sappcast_channel="{channel-id-or-slug}"]
 `
 
-Configure Sparkle to ingest the appcast.xml at https://your.site/wp-json/sparkling-appcast/v1/appcast.xml.
-You will see something like the following XML.
+Configure Sparkle to ingest the appcast.xml at https://your.site/wp-json/sparkling-appcast/v1/appcast.xml. You will see something like the following XML.
 
 `
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
