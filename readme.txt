@@ -67,8 +67,7 @@ We recommend you use the [`wp_sparkling_appcast` plugin](https://github.com/Usie
 
 ### Other
 
-To distribute a new build, you must upload the asset (1), create a build draft (2), after which you can finalize the
-build and publish it (3). Steps 1 and 2 are typically executed by your build server, while step 3 is done by a human.
+To distribute a new build, you must upload the asset (1), create a build draft (2), after which you can finalize the build and publish it (3). Steps 1 and 2 are typically executed by your build server, while step 3 is done by a human.
 
 ### 1. Uploading Asset
 
@@ -101,5 +100,4 @@ curl --location 'localhost:8088/wp-json/wp/v2/sappcast_app_build' \
 
 ### 3. Publish Build
 
-The user may now go to "App Build" on wp-admin and publish the draft after verifying the build. After publishing the
-build will appear on the relevant appcast (`/wp-json/sparkling-appcast/v1/appcast.xml`).
+The user may now go to "App Build" on wp-admin and publish the draft after verifying the build. After publishing the build will appear on the relevant appcast (`/wp-json/sparkling-appcast/v1/appcast.xml`).
